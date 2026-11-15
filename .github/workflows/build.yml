@@ -17,7 +17,12 @@ jobs:
         with:
           channel: 'stable'
       - name: Initialize Android Project
-        run: flutter create --platforms=android --project-name=so3rati .
+        run: |
+          cp pubspec.yaml pubspec.yaml.bak
+          cp lib/main.dart main.dart.bak
+          flutter create --platforms=android --project-name=so3rati .
+          mv pubspec.yaml.bak pubspec.yaml
+          mv main.dart.bak lib/main.dart
       - name: Get Dependencies
         run: flutter pub get
       - name: Build APK and AAB
